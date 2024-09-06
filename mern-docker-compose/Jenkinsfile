@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'kalpeshmohanta/docker-node-sonar_scanner:v4'
+      image 'kalpeshmohanta/docker-node-sonar_scanner:v5'
       args '--user root --privileged -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -14,12 +14,6 @@ pipeline {
       }
     }
 
-
-    stage('Run Sonar Scanner') {
-      steps {
-        sh 'sonar-scanner'
-      }
-    }
 
 
     stage('Static Code Analysis SONARQUBE') {
