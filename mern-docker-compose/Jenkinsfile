@@ -19,9 +19,10 @@ pipeline {
 
 
     stage('SonarQube Analysis') {
+      environment{
+          scannerHome = tool 'sonarqube-tool'
+       }
       steps {
-        script {
-          def scannerHome = tool 'sonarqube-tool'
           withSonarQubeEnv('sonarqube-server') {
             sh '''
                 #/usr/local/bin/sonar-scanner \
@@ -34,7 +35,6 @@ pipeline {
           }
         }
       }
-    }
 
 
     stage('Build and Push Docker Frontend Image') {
