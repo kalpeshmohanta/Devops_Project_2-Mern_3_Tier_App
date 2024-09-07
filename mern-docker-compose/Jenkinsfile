@@ -24,8 +24,8 @@ pipeline {
           def scannerHome = tool 'sonarqube-tool'
           withSonarQubeEnv('sonarqube-server') {
             sh '''
-                #/usr/local/bin/sonar-scanner \
-                ${scannerHome}/bin/sonar-scanner \
+                #${scannerHome}/bin/sonar-scanner \
+                /usr/local/bin/sonar-scanner \
                 -Dsonar.projectKey=myapp-sonarqube \
                 -Dsnonar.projectName=myapp-sonarqube \
                 -Dsonar.sources=. \
