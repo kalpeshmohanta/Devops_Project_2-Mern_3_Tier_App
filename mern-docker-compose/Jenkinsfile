@@ -18,21 +18,12 @@ pipeline {
     }
 
 
-    stage('Static Code Analysis SONARQUBE') {
-        environment {
-          scanner = tool 'sonarqube-tool'
-        }
-        steps{
-          withSonarQubeEnv('sonarqube-server'){
-            sh '''
-              ${scanner}/bin/sonar-scanner \
-              -Dsonar.projectKey=sonarqube-myapp-jenkins \
-              -Dsonar.projectName=sonarqube-myapp-jenkins \
-              -Dsonar.sources=.\
-            '''  
-        }
-      }
+    stage('SonarQube Analysis') {
+    def scannerHome = tool 'sonarqube-tool';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
     }
+  }
 
 
     stage('Build and Push Docker Frontend Image') {
@@ -51,6 +42,7 @@ pipeline {
         }
       }
     }
+  
 
 
 
