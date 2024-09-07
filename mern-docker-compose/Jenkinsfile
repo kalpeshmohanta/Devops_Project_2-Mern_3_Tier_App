@@ -7,9 +7,6 @@ pipeline {
     }
   }
 
-  environment {
-        SONARQUBE_SCANNER_HOME = tool 'SonarQube Scanner'
-    }
 
 
   stages {
@@ -28,7 +25,7 @@ pipeline {
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
-          sh 'cd mern-docker-compose && ${env.SONARQUBE_SCANNER_HOME}/bin/sonar-scanner -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
+          sh 'cd mern-docker-compose && sonar-scanner -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.host.url=${SONAR_URL}'
         }
       }
     }
