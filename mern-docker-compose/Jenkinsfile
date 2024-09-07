@@ -1,4 +1,5 @@
 pipeline {
+  // Agent as Docker Container
   agent {
     docker {
       image 'kalpeshmohanta/docker-node-sonar_scanner:v9'
