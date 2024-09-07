@@ -2,7 +2,7 @@ pipeline {
   // Agent as Docker Container
   agent {
     docker {
-      image 'kalpeshmohanta/docker-node-sonar_scanner:v16'
+      image 'kalpeshmohanta/docker-node-sonar_scanner:v17'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
@@ -23,8 +23,13 @@ pipeline {
         script {
           def scannerHome = tool 'sonarqube-tool'
           withSonarQubeEnv('sonarqube-server') {
-            sh "/usr/local/bin/sonar-scanner"
-            // sh "${scannerHome}/bin/sonar-scanner"
+            sh '''
+                /usr/local/bin/sonar-scanner \
+                -Dsonar.projectKey=myapp-sonarqube \
+                -Dsnonar.projectName=myapp-sonarqube \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://3.111.29.14:9000 \
+            '''
           }
         }
       }
