@@ -26,10 +26,10 @@ pipeline {
             sh '''
                 #/usr/local/bin/sonar-scanner \
                 ${scannerHome}/bin/sonar-scanner \
-                -Dsonar.projectKey=myapp-sonarqube \
-                -Dsnonar.projectName=myapp-sonarqube \
+                -Dsonar.projectKey=myapp-sonar \
+                -Dsnonar.projectName=myapp-sonar \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://3.111.29.14:9000 \
+                -Dsonar.host.url=http://3.111.29.14:9000
             '''
           }
         }
