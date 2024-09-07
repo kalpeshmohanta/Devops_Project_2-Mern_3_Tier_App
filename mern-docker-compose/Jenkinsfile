@@ -23,7 +23,8 @@ pipeline {
         script {
           def scannerHome = tool 'sonarqube-tool'
           withSonarQubeEnv('sonarqube-server') {
-            sh "${scannerHome}/bin/sonar-scanner"
+            sh "/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqube-tool/bin/sonar-scanner"
+            // sh "${scannerHome}/bin/sonar-scanner"
           }
         }
       }
