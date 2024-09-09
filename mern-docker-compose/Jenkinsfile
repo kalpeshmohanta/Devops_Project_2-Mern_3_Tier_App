@@ -100,8 +100,8 @@ pipeline {
 
                     # sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifests/deployment.yml
 
-                    sed -i "s|kalpeshmohanta/mern-docker-compose-backend:.*|kalpeshmohanta/mern-docker-compose-backend:${BUILD_NUMBER}|g" manifests/deployment.yml
-                    sed -i "s|kalpeshmohanta/mern-docker-compose-frontend:.*|kalpeshmohanta/mern-docker-compose-frontend:${BUILD_NUMBER}|g" manifests/deployment.yml
+                    sed -i "s|kalpeshmohanta/mern-docker-compose-backend:.*|kalpeshmohanta/mern-docker-compose-backend:${BUILD_NUMBER}|g" /var/lib/jenkins/workspace/myapp-jenkins/manifests/deployment.yml
+                    sed -i "s|kalpeshmohanta/mern-docker-compose-frontend:.*|kalpeshmohanta/mern-docker-compose-frontend:${BUILD_NUMBER}|g" /var/lib/jenkins/workspace/myapp-jenkins/manifests/deployment.yml
 
                     git add manifests/deployment.yml
                     git commit -m "Update deployment image to version ${BUILD_NUMBER}"
