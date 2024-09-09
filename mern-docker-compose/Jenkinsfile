@@ -86,8 +86,8 @@
               withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                   sh '''
                       git init
-                      git config user.email "kalpeshmohanta@gmail.com"
-                      git config user.name "kalpeshmohanta"
+                      git config --global user.email "kalpeshmohanta@gmail.com"
+                      git config --global user.name "kalpeshmohanta"
                       BUILD_NUMBER=${BUILD_NUMBER}
 
                       # sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifests/deployment.yml
