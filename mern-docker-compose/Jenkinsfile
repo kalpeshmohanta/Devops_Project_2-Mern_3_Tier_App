@@ -90,7 +90,7 @@ pipeline {
                     echo "Contents of the current directory:"
                     ls  # List the contents of the current directory
 
-                    cd ${WORKSPACE}  # Ensure we are in the workspace directory where the repo is cloned
+                    cd /var/lib/jenkins/workspace/myapp-jenkins  # Change to the directory where your Git repo is located
                     echo "Changed to workspace directory:"
                     pwd  # Print the current directory again to confirm
                     
