@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     gnupg \
     lsb-release \
     software-properties-common \
-    unzip
+    unzip \
+    git \
+    sed
 
 # Install OpenJDK 17. Prerequisite for sonar-scan
 RUN apt-get update && \
@@ -36,6 +38,9 @@ RUN echo \
 # Update the package list and install Docker
 RUN apt-get update && apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+
+# Clean up the apt cache to reduce the image size
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 
 
