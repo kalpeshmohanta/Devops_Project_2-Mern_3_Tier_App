@@ -85,24 +85,14 @@
           steps {
               withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                   sh '''
-                      echo "Current directory:"
-                      pwd  # Print the current directory
-                      echo "Contents of the current directory:"
-                      ls  # List the contents of the current directory
-
-                      cd /var/lib/jenkins/workspace/myapp-jenkins  # Change to the directory where your Git repo is located
-                      echo "Changed to workspace directory:"
-                      pwd  # Print the current directory again to confirm
-                      
-                      git init
                       git config user.email "kalpeshmohanta@gmail.com"
                       git config user.name "kalpeshmohanta"
                       BUILD_NUMBER=${BUILD_NUMBER}
 
                       # sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifests/deployment.yml
 
-                      sed -i "s|kalpeshmohanta/mern-docker-compose-backend:.*|kalpeshmohanta/mern-docker-compose-backend:${BUILD_NUMBER}|g" /var/lib/jenkins/workspace/myapp-jenkins/manifests/deployment.yml
-                      sed -i "s|kalpeshmohanta/mern-docker-compose-frontend:.*|kalpeshmohanta/mern-docker-compose-frontend:${BUILD_NUMBER}|g" /var/lib/jenkins/workspace/myapp-jenkins/manifests/deployment.yml
+                      sed -i "s|kalpeshmohanta/mern-docker-compose-backend:.*|kalpeshmohanta/mern-docker-compose-backend:${BUILD_NUMBER}|g" manifests/deployment.yml
+                      sed -i "s|kalpeshmohanta/mern-docker-compose-frontend:.*|kalpeshmohanta/mern-docker-compose-frontend:${BUILD_NUMBER}|g" manifests/deployment.yml
 
                       git add manifests/deployment.yml
                       git commit -m "Update deployment image to version ${BUILD_NUMBER}"
