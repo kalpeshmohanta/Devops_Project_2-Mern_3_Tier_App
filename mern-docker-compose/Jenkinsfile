@@ -85,6 +85,15 @@ pipeline {
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                 sh '''
+                    echo "Current directory:"
+                    pwd  # Print the current directory
+                    echo "Contents of the current directory:"
+                    ls  # List the contents of the current directory
+
+                    cd ${WORKSPACE}  # Ensure we are in the workspace directory where the repo is cloned
+                    echo "Changed to workspace directory:"
+                    pwd  # Print the current directory again to confirm
+                    
                     git config user.email "kalpeshmohanta@gmail.com"
                     git config user.name "kalpeshmohanta"
                     BUILD_NUMBER=${BUILD_NUMBER}
