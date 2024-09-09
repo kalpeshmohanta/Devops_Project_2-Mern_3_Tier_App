@@ -13,7 +13,7 @@
       stage('Checkout') {
         steps {
           sh 'echo passed'
-          //git branch: 'main', url: 'https://github.com/kalpeshmohanta/Devops_Project_2-Mern_3_Tier_App.git'
+          git branch: 'main', url: 'https://github.com/kalpeshmohanta/Devops_Project_2-Mern_3_Tier_App.git'
         }
       }
 
