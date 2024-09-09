@@ -85,6 +85,7 @@
           steps {
               withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                   sh '''
+                      git init
                       git config user.email "kalpeshmohanta@gmail.com"
                       git config user.name "kalpeshmohanta"
                       BUILD_NUMBER=${BUILD_NUMBER}
