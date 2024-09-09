@@ -94,6 +94,7 @@
                       echo "Changed to workspace directory:"
                       pwd  # Print the current directory again to confirm
                       
+                      git init
                       git config user.email "kalpeshmohanta@gmail.com"
                       git config user.name "kalpeshmohanta"
                       BUILD_NUMBER=${BUILD_NUMBER}
