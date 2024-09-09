@@ -85,6 +85,9 @@
           steps {
               withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                   sh '''
+                      # Allow Git to treat the Jenkins workspace as a trusted directory
+                      git config --global --add safe.directory /var/lib/jenkins/workspace/myapp-jenkins
+                      
                       git init
                       git config --global user.email "kalpeshmohanta@gmail.com"
                       git config --global user.name "kalpeshmohanta"
