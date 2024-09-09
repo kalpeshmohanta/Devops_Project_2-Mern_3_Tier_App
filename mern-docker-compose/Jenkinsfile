@@ -25,12 +25,11 @@ pipeline {
       steps {
           withSonarQubeEnv('sonarqube-server') {
             sh '''
-                #/usr/local/bin/sonar-scanner \
+                # /usr/local/bin/sonar-scanner \
                 ${scannerHome}/bin/sonar-scanner \
                 -Dsonar.projectKey=myapp-sonar \
                 -Dsnonar.projectName=myapp-sonar \
                 -Dsonar.sources=. \
-                -Dsonar.host.url=http://3.111.29.14:9000
             '''
           }
         }
@@ -73,7 +72,35 @@ pipeline {
         }
       }
     }
-    
+
+
+
+    stage('Update Deployment File in Manifest') {
+
+        environment {
+            GIT_REPO_NAME = "Devops_Project_2-Mern_3_Tier_App"
+            GIT_USER_NAME = "kalpeshmohanta"
+        }
+
+        steps {
+            withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
+                sh '''
+                    git config user.email "kalpeshmohanta@gmail.com"
+                    git config user.name "kalpeshmohanta"
+                    BUILD_NUMBER=${BUILD_NUMBER}
+
+                    # sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" manifests/deployment.yml
+
+                    sed -i "s|kalpeshmohanta/mern-docker-compose-backend:.*|kalpeshmohanta/mern-docker-compose-backend:${BUILD_NUMBER}|g" manifests/deployment.yml
+                    sed -i "s|kalpeshmohanta/mern-docker-compose-frontend:.*|kalpeshmohanta/mern-docker-compose-frontend:${BUILD_NUMBER}|g" manifests/deployment.yml
+
+                    git add manifests/deployment.yml
+                    git commit -m "Update deployment image to version ${BUILD_NUMBER}"
+                    git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
+                '''
+           }
+        }
+    }
 
   }
 }
