@@ -25,12 +25,12 @@ spec:
             - name: mongo-data
               mountPath: /data/db
         - name: mern-app-backend
-          image: kalpeshmohanta/mern-docker-compose-backend:latest
+          image: kalpeshmohanta/mern-docker-compose-backend:98
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5050
         - name: mern-app-frontend
-          image: kalpeshmohanta/mern-docker-compose-frontend:latest
+          image: kalpeshmohanta/mern-docker-compose-frontend:98
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5173
